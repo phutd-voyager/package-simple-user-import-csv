@@ -4,7 +4,7 @@ namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use Illuminate\Support\Facades\Response;
 
-class CsvWriter
+class CsvWriter implements Interfaces\CsvWriterInterface
 {
     protected $headers;
 
