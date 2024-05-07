@@ -17,7 +17,7 @@ class UserImportService implements Interfaces\UserImportServiceInterface
             ]);
 
             if ($validator->fails()) {
-                throw new \Exception('Validation error: ' . $validator->errors()->first());
+                throw new \Exception('Validation error - Row: ' . $data['num_rows'] . ': ' . $validator->errors()->first());
             }
 
             $data['password'] = bcrypt($data['password']);
