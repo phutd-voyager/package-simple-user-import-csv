@@ -15,7 +15,7 @@ class CsvFileReader implements Interfaces\CsvFileReaderInterface
         $data = [];
         $numRows = 1;
 
-        $limitLength = config('simple_user_import_csv.limit_length', 1000);
+        $limitLength = config('simple_user_import_csv.csv_reader.limit_length', 1000);
 
         while (($row = fgetcsv($handle, $limitLength, ",")) !== false) {
             if (count($row) >= 3) {

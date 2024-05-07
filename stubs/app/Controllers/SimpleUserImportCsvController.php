@@ -30,7 +30,7 @@ class SimpleUserImportCsvController extends Controller
     {
         try {
             $file = $request->file('file');
-            $skipHeader = config('simple_user_import_csv.skip_header', true);
+            $skipHeader = config('simple_user_import_csv.csv_reader.skip_header', true);
 
             $userData = $this->csvFileReader->read($file->getPathname(), $skipHeader);
 

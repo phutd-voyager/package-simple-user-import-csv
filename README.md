@@ -21,5 +21,5 @@ php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUser
 
 ```bash
 ...
-require __DIR__.'/simple_user_import_csv.php';
+require __DIR__ . '/simple_user_import_csv.php';
 ```
