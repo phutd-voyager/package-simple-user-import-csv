@@ -37,7 +37,7 @@ class InstallCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views', resource_path('views'));
 
         // Routes
-        copy(__DIR__.'/../../stubs/routes/SimpleUserImportCsvRoute.php', base_path('routes/SimpleUserImportCsvRoute.php'));
+        copy(__DIR__.'/../../stubs/routes/simple_user_import_csv.php', base_path('routes/simple_user_import_csv.php'));
 
         $this->line('');
         $this->components->info('Package scaffolding installed successfully.');
