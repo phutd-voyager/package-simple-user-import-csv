@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
-use VoyagerInc\SimpleUserImportCsv\Services\CsvWriter;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvFileReaderInterface;
+use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvWriterInterface;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserImportServiceInterface;
 
 class SimpleUserImportCsvController extends Controller
@@ -15,12 +14,10 @@ class SimpleUserImportCsvController extends Controller
     private $userImportService;
     private $csvWriter;
 
-    private $filePath = 'app/temp/user.csv';
-
     public function __construct(
         CsvFileReaderInterface $csvFileReader,
         UserImportServiceInterface $userImportService,
-        CsvWriter $csvWriter
+        CsvWriterInterface $csvWriter
     ) {
         $this->csvFileReader = $csvFileReader;
         $this->userImportService = $userImportService;
@@ -54,34 +51,12 @@ class SimpleUserImportCsvController extends Controller
         }
     }
 
-    // public function downloadFileTemp()
-    // {
-    //     try {
-    //         $filePath = public_path($this->filePath);
-
-    //         $checkFileExist = File::exists($filePath);
-
-    //         if (!$checkFileExist) {
-    //             return redirect()->back()->withErrors('File not found.');
-    //         }
-
-    //         $headers = [
-    //             'Content-Type' => 'text/csv',
-    //             'Content-Disposition' => 'attachment; filename="user.csv"',
-    //         ];
-
-    //         return response()->download($filePath, 'user.csv', $headers);
-    //     } catch (\Throwable $th) {
-    //         throw $th;
-    //     }
-    // }
-
     public function downloadFileTemp()
     {
         try {
             return $this->csvWriter->download();
-        } catch (\Throwable $th) {
-            throw $th;
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         }
     }
 }

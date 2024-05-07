@@ -3,10 +3,19 @@
 namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use Illuminate\Support\Facades\Response;
-use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvHeaderProviderInterface;
 
 class CsvWriter
 {
+    protected $headers;
+
+    public function __construct()
+    {
+        $this->headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="users.csv"'
+        ];
+    }
+
     public function download(array $data = [])
     {
         $headers = config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
@@ -24,6 +33,6 @@ class CsvWriter
 
         return Response::streamDownload(function () use ($csv) {
             echo $csv;
-        }, 'users.csv');
+        }, 'users.csv', $this->headers);
     }
 }
