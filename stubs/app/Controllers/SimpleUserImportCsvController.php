@@ -34,21 +34,17 @@ class SimpleUserImportCsvController extends Controller
 
             $userData = $this->csvFileReader->read($file->getPathname(), $skipHeader);
 
-            // Start transaction
             DB::beginTransaction();
 
             $this->userImportService->import($userData);
 
-            // Commit transaction
             DB::commit();
 
             return redirect()->back()->with('success', 'Users imported successfully.');
         } catch (\Exception $e) {
-            // Rollback transaction
             DB::rollBack();
 
-            // Handle any errors
-            return redirect()->back()->with('error', 'Error importing users: ' . $e->getMessage())->withInput();
+            return redirect()->back()->withErrors('Error importing users: ' . $e->getMessage());
         }
     }
 
