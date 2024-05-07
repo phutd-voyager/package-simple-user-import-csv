@@ -16,13 +16,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VoyagerInc\\SimnpleUserImportCsv\\": "src/"
+            "VoyagerInc\\SimpleUserImportCsv\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VoyagerInc\\SimnpleUserImportCsv\\SimpleUserImportCsvServiceProvider"
+                "VoyagerInc\\SimpleUserImportCsv\\SimpleUserImportCsvServiceProvider"
             ]
         }
     },

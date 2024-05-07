@@ -1,6 +1,6 @@
 <?php
 
-namespace VoyagerInc\SimnpleUserImportCsv;
+namespace VoyagerInc\SimpleUserImportCsv;
 
 class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProvider
 {
