@@ -13,8 +13,15 @@ class CsvFileReader implements Interfaces\CsvFileReaderInterface
         }
 
         $data = [];
+
         while (($row = fgetcsv($handle, 1000, ",")) !== false) {
-            $data[] = $row;
+            if (count($row) >= 3) {
+                $data[] = [
+                    'name' => $row[0],
+                    'email' => $row[1],
+                    'password' => $row[2],
+                ];
+            }
         }
 
         fclose($handle);

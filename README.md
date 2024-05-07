@@ -12,7 +12,7 @@ composer require voyager-inc/simple-user-import-csv
 
 - Publish provider
 ```bash
-php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUserImportCsvController"
+php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUserImportCsvServiceProvider"
 ```
 
 ## Usage
