@@ -5,7 +5,7 @@ namespace VoyagerInc\SimpleUserImportCsv\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
-class UserImportService
+class UserImportService implements Interfaces\UserImportServiceInterface
 {
     public function import(array $userData)
     {

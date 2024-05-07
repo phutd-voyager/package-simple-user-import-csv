@@ -2,7 +2,7 @@
 
 namespace VoyagerInc\SimpleUserImportCsv\Services;
 
-class CsvFileReader
+class CsvFileReader implements Interfaces\CsvFileReaderInterface
 {
     public function read($filePath, $skipHeader = true)
     {
