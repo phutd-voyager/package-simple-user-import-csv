@@ -10,6 +10,11 @@
 composer require voyager-inc/simple-user-import-csv
 ```
 
+- Publish provider
+```bash
+php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUserImportCsvController"
+```
+
 ## Usage
 
 - Add more this line to `web.php` file
