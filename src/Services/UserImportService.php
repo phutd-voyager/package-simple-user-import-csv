@@ -3,7 +3,6 @@
 namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserValidatorInterface;
 
 class UserImportService implements Interfaces\UserImportServiceInterface

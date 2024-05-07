@@ -6,17 +6,9 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
 {
     public function register()
     {
-        $this->app->bind(Services\Interfaces\CsvFileReaderInterface::class, function () {
-            return new Services\CsvFileReader();
-        });
-
-        $this->app->bind(Services\Interfaces\UserImportServiceInterface::class, function () {
-            return new Services\UserImportService();
-        });
-
-        $this->app->bind(Services\Interfaces\UserValidatorInterface::class, function () {
-            return new Services\UserValidator();
-        });
+        $this->registerCsvFileReader();
+        $this->registerUserValidator();
+        $this->registerUserImportService();
     }
 
     public function boot()
@@ -40,6 +32,30 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
             Console\InstallCommand::class,
             Services\Interfaces\CsvFileReaderInterface::class,
             Services\Interfaces\UserImportServiceInterface::class,
+            Services\Interfaces\UserValidatorInterface::class,
         ];
+    }
+
+    protected function registerCsvFileReader()
+    {
+        $this->app->bind(Services\Interfaces\CsvFileReaderInterface::class, function ($app) {
+            return new Services\CsvFileReader();
+        });
+    }
+
+    protected function registerUserValidator()
+    {
+        $this->app->bind(Services\Interfaces\UserValidatorInterface::class, function ($app) {
+            return new Services\UserValidator();
+        });
+    }
+
+    protected function registerUserImportService()
+    {
+        $this->app->bind(Services\Interfaces\UserImportServiceInterface::class, function ($app) {
+            $validator = $app->make(Services\Interfaces\UserValidatorInterface::class);
+
+            return new Services\UserImportService($validator);
+        });
     }
 }
