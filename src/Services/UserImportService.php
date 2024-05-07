@@ -4,21 +4,21 @@ namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
+use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserValidatorInterface;
 
 class UserImportService implements Interfaces\UserImportServiceInterface
 {
+    protected $validator;
+
+    public function __construct(UserValidatorInterface $validator)
+    {
+        $this->validator = $validator;
+    }
+
     public function import(array $userData)
     {
         foreach ($userData as $data) {
-            $validator = Validator::make($data, [
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:6',
-            ]);
-
-            if ($validator->fails()) {
-                throw new \Exception('Validation error - Row: ' . $data['num_rows'] . ': ' . $validator->errors()->first());
-            }
+            $this->validator->validate($data);
 
             $data['password'] = bcrypt($data['password']);
 

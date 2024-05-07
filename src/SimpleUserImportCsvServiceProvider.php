@@ -13,6 +13,10 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         $this->app->bind(Services\Interfaces\UserImportServiceInterface::class, function () {
             return new Services\UserImportService();
         });
+
+        $this->app->bind(Services\Interfaces\UserValidatorInterface::class, function () {
+            return new Services\UserValidator();
+        });
     }
 
     public function boot()
