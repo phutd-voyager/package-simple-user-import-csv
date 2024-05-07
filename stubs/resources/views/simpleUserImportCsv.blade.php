@@ -10,6 +10,14 @@
     <hr>
 @endif
 
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+
+    <hr>
+@endif
+
 <form action="{{ route('simple-user-import-csv.import') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <input type="file" name="file">
