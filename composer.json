@@ -22,7 +22,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VoyagerInc\\SimnpleUserImportCsv\\ServiceProvider"
+                "VoyagerInc\\SimnpleUserImportCsv\\SimpleUserImportCsvServiceProvider"
             ]
         }
     },
