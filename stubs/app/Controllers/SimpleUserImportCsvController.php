@@ -6,6 +6,7 @@ use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvFileReaderInterface;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserImportServiceInterface;
+use Illuminate\Support\Facades\Storage;
 
 class SimpleUserImportCsvController extends Controller
 {

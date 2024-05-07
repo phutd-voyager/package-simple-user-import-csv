@@ -6,4 +6,4 @@
 
 <hr>
 
-<a href="#">Download file temp</a>
+<a href="{{ route('simple-user-import-csv.downloadFileTemp') }}">Download file temp</a>
