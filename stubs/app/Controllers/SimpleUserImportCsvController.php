@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvFileReaderInterface;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserImportServiceInterface;
-use Illuminate\Support\Facades\Storage;
 
 class SimpleUserImportCsvController extends Controller
 {
@@ -54,19 +54,21 @@ class SimpleUserImportCsvController extends Controller
 
     public function downloadFileTemp()
     {
-        $filePath = public_path($this->filePath);
+        try {
+            $checkFileExist = File::exists(public_path($this->filePath));
 
-        $checkFileExist = Storage::disk('public')->exists($this->filePath);
+            if (!$checkFileExist) {
+                return redirect()->back()->withErrors('File not found.');
+            }
 
-        if (!$checkFileExist) {
-            return redirect()->back()->with('error', 'File not found.');
+            $headers = [
+                'Content-Type' => 'text/csv',
+                'Content-Disposition' => 'attachment; filename="user.csv"',
+            ];
+
+            return response()->download($filePath, 'user.csv', $headers);
+        } catch (\Throwable $th) {
+            throw $th;
         }
-
-        $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="user.csv"',
-        ];
-
-        return response()->download($filePath, 'user.csv', $headers);
     }
 }

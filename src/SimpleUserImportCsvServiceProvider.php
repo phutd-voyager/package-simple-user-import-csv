@@ -24,6 +24,10 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         $this->commands([
             Console\InstallCommand::class,
         ]);
+
+        $this->publishes([
+            __DIR__ . '/../config/simple_import_user.php'   =>  config_path('simple_import_user.php'),
+        ], 'simple-upload-file');
     }
 
 

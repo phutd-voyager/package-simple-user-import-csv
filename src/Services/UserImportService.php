@@ -13,11 +13,14 @@ class UserImportService implements Interfaces\UserImportServiceInterface
             $validator = Validator::make($data, [
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
             ]);
 
             if ($validator->fails()) {
                 throw new \Exception('Validation error: ' . $validator->errors()->first());
             }
+
+            $data['password'] = bcrypt($data['password']);
 
             User::create($data);
         }
