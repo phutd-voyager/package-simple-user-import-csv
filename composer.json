@@ -1,7 +1,7 @@
 {
     "name": "voyager-inc/simple-user-import-csv",
     "description": "Simple import user",
-    "type": "false",
+    "type": "library",
     "keywords": ["upload-file", "simple-user-import-csv"],
     "license": "MIT",
     "authors": [

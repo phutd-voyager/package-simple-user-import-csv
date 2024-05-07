@@ -30,6 +30,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
     public function provides()
     {
         return [
+            Console\InstallCommand::class,
             Services\Interfaces\CsvFileReaderInterface::class,
             Services\Interfaces\UserImportServiceInterface::class,
         ];
