@@ -5,7 +5,7 @@ namespace VoyagerInc\SimpleUserImportCsv\Console;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 
-class InstallCommand extends Command
+class InstallHandlerCommand extends Command
 {
     protected $signature = 'simple-user-import-csv:install';
 

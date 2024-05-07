@@ -16,17 +16,17 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         }
 
         $this->commands([
-            Console\InstallCommand::class,
+            \VoyagerInc\SimpleUserImportCsv\Console\InstallHandlerCommand::class,
         ]);
     }
 
-    /**
+     /**
      * Get the services provided by the provider.
      *
      * @return array
      */
     public function provides()
     {
-        return [Console\InstallCommand::class];
+        return [\VoyagerInc\SimpleUserImportCsv\Console\InstallHandlerCommand::class];
     }
 }
