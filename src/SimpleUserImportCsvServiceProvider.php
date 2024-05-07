@@ -16,7 +16,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         }
 
         $this->commands([
-            Console\InstallHandlerCommand::class,
+            \VoyagerInc\SimpleUserImportCsv\Console\InstallCommand::class,
         ]);
     }
 }
