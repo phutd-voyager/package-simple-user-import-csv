@@ -12,6 +12,8 @@ class SimpleUserImportCsvController extends Controller
     private $csvFileReader;
     private $userImportService;
 
+    private $filePath = 'app/temp/user.csv';
+
     public function __construct(CsvFileReaderInterface $csvFileReader, UserImportServiceInterface $userImportService)
     {
         $this->csvFileReader = $csvFileReader;
@@ -47,5 +49,23 @@ class SimpleUserImportCsvController extends Controller
             // Handle any errors
             return redirect()->back()->with('error', 'Error importing users: ' . $e->getMessage())->withInput();
         }
+    }
+
+    public function downloadFileTemp()
+    {
+        $filePath = public_path($this->filePath);
+
+        $checkFileExist = Storage::disk('public')->exists($this->filePath);
+
+        if (!$checkFileExist) {
+            return redirect()->back()->with('error', 'File not found.');
+        }
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="user.csv"',
+        ];
+
+        return response()->download($filePath, 'user.csv', $headers);
     }
 }
