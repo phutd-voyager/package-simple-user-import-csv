@@ -55,7 +55,7 @@ class SimpleUserImportCsvController extends Controller
     public function downloadFileTemp()
     {
         try {
-            $filePath = storage_path($this->filePath);
+            $filePath = public_path($this->filePath);
 
             $checkFileExist = File::exists($filePath);
 
