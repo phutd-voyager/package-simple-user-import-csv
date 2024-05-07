@@ -2,8 +2,6 @@
 
 namespace VoyagerInc\SimnpleUserImportCsv;
 
-use VoyagerInc\SimpleUserImportCsv\Console\InstallCommand;
-
 class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProvider
 {
     public function register()
@@ -18,7 +16,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         }
 
         $this->commands([
-            InstallCommand::class,
+            \VoyagerInc\SimpleUserImportCsv\Console\InstallCommand::class,
         ]);
     }
 
@@ -29,6 +27,6 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
      */
     public function provides()
     {
-        return [InstallCommand::class];
+        return [\VoyagerInc\SimpleUserImportCsv\Console\InstallCommand::class];
     }
 }
