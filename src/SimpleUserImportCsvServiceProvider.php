@@ -17,6 +17,10 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
 
     public function boot()
     {
+        $this->publishes([
+            __DIR__ . '/../config/simple_user_import_csv.php'   =>  config_path('simple_user_import_csv.php'),
+        ], 'simple-user-import-csv');
+
         if (!$this->app->runningInConsole()) {
             return;
         }
@@ -24,12 +28,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         $this->commands([
             Console\InstallCommand::class,
         ]);
-
-        $this->publishes([
-            __DIR__ . '/../config/simple_user_import_csv.php'   =>  config_path('simple_user_import_csv.php'),
-        ], 'simple-user-import-csv');
     }
-
 
     public function provides()
     {
