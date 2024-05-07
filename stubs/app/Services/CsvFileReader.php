@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleUserImportCsv\Services;
+namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 class CsvFileReader
 {

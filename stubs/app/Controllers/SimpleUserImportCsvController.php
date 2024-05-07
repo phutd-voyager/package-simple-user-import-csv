@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
-use SimpleUserImportCsv\Services\CsvFileReader;
-use SimpleUserImportCsv\Services\UserImportService;
+use VoyagerInc\SimpleUserImportCsv\Services\CsvFileReader;
+use VoyagerInc\SimpleUserImportCsv\Services\UserImportService;
 
 class SimpleUserImportCsvController extends Controller
 {

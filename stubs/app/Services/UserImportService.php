@@ -1,6 +1,6 @@
 <?php
 
-namespace SimpleUserImportCsv\Services;
+namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Validator;
