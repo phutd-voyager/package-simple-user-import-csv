@@ -9,6 +9,8 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         $this->registerCsvFileReader();
         $this->registerUserValidator();
         $this->registerUserImportService();
+
+        $this->app->singleton(Services\CsvWriter::class);
     }
 
     public function boot()
@@ -30,9 +32,10 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
     {
         return [
             Console\InstallCommand::class,
-            Services\Interfaces\CsvFileReaderInterface::class,
-            Services\Interfaces\UserImportServiceInterface::class,
-            Services\Interfaces\UserValidatorInterface::class,
+            Services\CsvFileReader::class,
+            Services\UserImportService::class,
+            Services\UserValidator::class,
+            Services\CsvWriter::class,
         ];
     }
 

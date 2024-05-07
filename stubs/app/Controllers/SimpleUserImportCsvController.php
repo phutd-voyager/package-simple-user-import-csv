@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use VoyagerInc\SimpleUserImportCsv\Services\CsvWriter;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvFileReaderInterface;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserImportServiceInterface;
 
@@ -12,13 +13,18 @@ class SimpleUserImportCsvController extends Controller
 {
     private $csvFileReader;
     private $userImportService;
+    private $csvWriter;
 
     private $filePath = 'app/temp/user.csv';
 
-    public function __construct(CsvFileReaderInterface $csvFileReader, UserImportServiceInterface $userImportService)
-    {
+    public function __construct(
+        CsvFileReaderInterface $csvFileReader,
+        UserImportServiceInterface $userImportService,
+        CsvWriter $csvWriter
+    ) {
         $this->csvFileReader = $csvFileReader;
         $this->userImportService = $userImportService;
+        $this->csvWriter = $csvWriter;
     }
 
     public function index()
@@ -48,23 +54,32 @@ class SimpleUserImportCsvController extends Controller
         }
     }
 
+    // public function downloadFileTemp()
+    // {
+    //     try {
+    //         $filePath = public_path($this->filePath);
+
+    //         $checkFileExist = File::exists($filePath);
+
+    //         if (!$checkFileExist) {
+    //             return redirect()->back()->withErrors('File not found.');
+    //         }
+
+    //         $headers = [
+    //             'Content-Type' => 'text/csv',
+    //             'Content-Disposition' => 'attachment; filename="user.csv"',
+    //         ];
+
+    //         return response()->download($filePath, 'user.csv', $headers);
+    //     } catch (\Throwable $th) {
+    //         throw $th;
+    //     }
+    // }
+
     public function downloadFileTemp()
     {
         try {
-            $filePath = public_path($this->filePath);
-
-            $checkFileExist = File::exists($filePath);
-
-            if (!$checkFileExist) {
-                return redirect()->back()->withErrors('File not found.');
-            }
-
-            $headers = [
-                'Content-Type' => 'text/csv',
-                'Content-Disposition' => 'attachment; filename="user.csv"',
-            ];
-
-            return response()->download($filePath, 'user.csv', $headers);
+            return $this->csvWriter->download();
         } catch (\Throwable $th) {
             throw $th;
         }
