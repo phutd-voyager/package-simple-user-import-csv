@@ -19,14 +19,4 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
             Console\InstallHandlerCommand::class,
         ]);
     }
-
-     /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return [Console\InstallHandlerCommand::class];
-    }
 }
