@@ -20,7 +20,7 @@
 
 <form action="{{ route('simple-user-import-csv.import') }}" method="POST" enctype="multipart/form-data">
     @csrf
-    <input type="file" name="file">
+    <input type="file" name="file" required accept=".csv">
     <button type="submit">Submit</button>
 </form>
 
