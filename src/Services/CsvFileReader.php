@@ -19,7 +19,7 @@ class CsvFileReader implements Interfaces\CsvFileReaderInterface
         $headerFormat = config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
 
         while (($row = fgetcsv($handle, $limitLength, ",")) !== false) {
-            if (count($row) >= count($headerFormat)) {
+            if (count($row) === count($headerFormat)) {
                 $data[] = [
                     'name' => $row[0],
                     'email' => $row[1],
