@@ -7,7 +7,7 @@ use Illuminate\Filesystem\Filesystem;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'user-import-csv:install';
+    protected $signature = 'simple-user-import-csv:install';
 
     protected $description = 'Install the user import CSV package';
 
