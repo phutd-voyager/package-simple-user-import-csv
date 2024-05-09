@@ -57,16 +57,16 @@ class CsvWritter implements Interfaces\CsvWritterInterface
 
     protected function getHeaderFormat(): array
     {
-        return config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
+        return config('user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
     }
 
     public function getFileName(): string
     {
-        return config('simple_user_import_csv.csv_reader.file_name', 'users.csv');
+        return config('user_import_csv.csv_reader.file_name', 'users.csv');
     }
 
     public function setFileName(string $fileName)
     {
-        config(['simple_user_import_csv.csv_reader.file_name' => $fileName]);
+        config(['user_import_csv.csv_reader.file_name' => $fileName]);
     }
 }

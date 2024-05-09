@@ -7,9 +7,9 @@ use Illuminate\Filesystem\Filesystem;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'simple-user-import-csv:install';
+    protected $signature = 'user-import-csv:install';
 
-    protected $description = 'Install the Simple User Import CSV package';
+    protected $description = 'Install the user import CSV package';
 
     public function handle()
     {
@@ -18,7 +18,7 @@ class InstallCommand extends Command
 
     protected function install()
     {
-        $this->info('Installing Simple User Import CSV package...');
+        $this->info('Installing User Import CSV package...');
 
         // Controllers
         (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers'));
@@ -33,7 +33,7 @@ class InstallCommand extends Command
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views', resource_path('views'));
 
         // Routes
-        copy(__DIR__.'/../../stubs/routes/simple_user_import_csv.php', base_path('routes/simple_user_import_csv.php'));
+        copy(__DIR__.'/../../stubs/routes/user_import_csv.php', base_path('routes/user_import_csv.php'));
 
         $this->line('');
         $this->components->info('Package scaffolding installed successfully.');

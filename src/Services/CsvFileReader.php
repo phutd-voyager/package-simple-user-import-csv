@@ -18,8 +18,8 @@ class CsvFileReader implements Interfaces\CsvFileReaderInterface
             $numRows++;
         }
 
-        $limitLength = config('simple_user_import_csv.csv_reader.limit_length', 1000);
-        $headerFormat = config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
+        $limitLength = config('user_import_csv.csv_reader.limit_length', 1000);
+        $headerFormat = config('user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
 
         while (($row = fgetcsv($handle, $limitLength, ",")) !== false) {
             if (count($row) === count($headerFormat)) {

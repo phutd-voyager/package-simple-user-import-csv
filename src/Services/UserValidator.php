@@ -10,7 +10,7 @@ class UserValidator implements Interfaces\UserValidatorInterface
 
     public function __construct()
     {
-        $this->rules = config('simple_user_import_csv.user_validator.rules', [
+        $this->rules = config('user_import_csv.user_validator.rules', [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6',

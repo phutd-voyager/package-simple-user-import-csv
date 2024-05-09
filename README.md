@@ -7,7 +7,7 @@
 ## Installation
 
 ```bash
-composer require voyager-inc/simple-user-import-csv
+composer require voyager-inc/user-import-csv
 ```
 
 - Publish provider
@@ -20,12 +20,12 @@ php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUser
 - Run command to copy file from stubs folder
 
 ```bash
-php artisan simple-user-import-csv:install
+php artisan user-import-csv:install
 ```
 
 - Add more this line to `web.php` file
 
 ```bash
 ...
-require __DIR__ . '/simple_user_import_csv.php';
+require __DIR__ . '/user_import_csv.php';
 ```
