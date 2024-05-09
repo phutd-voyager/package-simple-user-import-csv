@@ -13,11 +13,6 @@ class CsvFileReaderTest extends BaseTest
         $this->csvFileReader = new \VoyagerInc\SimpleUserImportCsv\Services\CsvFileReader();
     }
 
-    protected function getPackageProviders()
-    {
-        return [\VoyagerInc\SimpleUserImportCsv\SimpleUserImportCsvServiceProvider::class];
-    }
-
     #[test]
     public function test_instance_of_csv_file_reader()
     {
