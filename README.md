@@ -17,6 +17,12 @@ php artisan vendor:publish --provider="VoyagerInc\SimpleUserImportCsv\SimpleUser
 
 ## Usage
 
+- Run command to copy file from stubs folder
+
+```bash
+php artisan simple-user-import-csv:install
+```
+
 - Add more this line to `web.php` file
 
 ```bash
