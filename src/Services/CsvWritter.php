@@ -12,7 +12,6 @@ class CsvWritter implements Interfaces\CsvWritterInterface
     {
         $this->headers = [
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="users.csv"'
         ];
     }
 
@@ -30,6 +29,15 @@ class CsvWritter implements Interfaces\CsvWritterInterface
         rewind($file);
         $csv = stream_get_contents($file);
         fclose($file);
+
+
+        $fileName = 'users.csv';
+
+        $headersExtra = [
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
+        ];
+
+        $this->headers = array_merge($this->headers, $headersExtra);
 
         return Response::streamDownload(function () use ($csv) {
             echo $csv;
