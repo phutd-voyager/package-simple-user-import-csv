@@ -32,10 +32,6 @@ class InstallCommand extends Command
         (new Filesystem)->ensureDirectoryExists(resource_path('views'));
         (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/resources/views', resource_path('views'));
 
-        // Files
-        (new Filesystem)->ensureDirectoryExists(public_path('app/temp'));
-        (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/public/app/temp', public_path('app/temp'));
-
         // Routes
         copy(__DIR__.'/../../stubs/routes/simple_user_import_csv.php', base_path('routes/simple_user_import_csv.php'));
 
