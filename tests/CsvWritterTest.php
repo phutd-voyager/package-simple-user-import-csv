@@ -39,6 +39,17 @@ class CsvWritterTest extends BaseTest
     }
 
     #[test]
+    public function test_sets_custom_filename_correctly()
+    {
+        $customFileName = 'custom_users.csv';
+        $this->csvWritter->setFileName($customFileName);
+
+        $fileName = $this->csvWritter->getFileName();
+
+        $this->assertEquals($customFileName, $fileName);
+    }
+
+    #[test]
     public function test_csv_download_with_data()
     {
         $mockData = [
@@ -57,12 +68,14 @@ class CsvWritterTest extends BaseTest
             fclose($file);
 
             $expectedCsv = "name,email,password\nFunky,funky@gmail.com,password\nPhuTran,phutd@voyager-hcm.com,password\n";
+
             $this->assertEquals($expectedCsv, $csv);
 
             $expectedHeaders = [
                 'Content-Type' => 'text/csv',
                 'Content-Disposition' => 'attachment; filename="users.csv"'
             ];
+
             $this->assertEquals($expectedHeaders, $headers);
         });
 
@@ -88,6 +101,7 @@ class CsvWritterTest extends BaseTest
                 'Content-Type' => 'text/csv',
                 'Content-Disposition' => 'attachment; filename="users.csv"'
             ];
+
             $this->assertEquals($expectedHeaders, $headers);
         });
 
@@ -95,7 +109,7 @@ class CsvWritterTest extends BaseTest
     }
 
     #[test]
-    public function testCsvDownloadWithCustomHeaders()
+    public function test_csv_download_with_custom_headers()
     {
         $mockData = [
             ['Funky','funky@gmail.com','password'],
@@ -107,19 +121,24 @@ class CsvWritterTest extends BaseTest
             'Content-Disposition' => 'attachment; filename="custom_users.csv"'
         ];
 
+        $this->csvWritter->setHeaders($customHeaders);
+        $this->csvWritter->setFilename('custom_users.csv');
+
         Response::shouldReceive('streamDownload')->once()->andReturnUsing(function ($callback, $filename, $headers) use ($mockData, $customHeaders) {
             $file = fopen('php://temp', 'w+');
             fputcsv($file, ['name', 'email', 'password']);
+
             foreach ($mockData as $row) {
                 fputcsv($file, $row);
             }
+
             rewind($file);
             $csv = stream_get_contents($file);
             fclose($file);
 
             $expectedCsv = "name,email,password\nFunky,funky@gmail.com,password\nPhuTran,phutd@voyager-hcm.com,password\n";
-            $this->assertEquals($expectedCsv, $csv);
 
+            $this->assertEquals($expectedCsv, $csv);
             $this->assertEquals($customHeaders, $headers);
         });
 
