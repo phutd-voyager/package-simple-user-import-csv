@@ -17,7 +17,7 @@ class CsvWritter implements Interfaces\CsvWritterInterface
 
     public function download(array $data = [])
     {
-        $headers = config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
+        $headers = $this->getHeaderFormat();
 
         $file = fopen('php://temp', 'w+');
         fputcsv($file, $headers);
@@ -33,14 +33,30 @@ class CsvWritter implements Interfaces\CsvWritterInterface
 
         $fileName = 'users.csv';
 
-        $headersExtra = [
-            'Content-Disposition' => 'attachment; filename="' . $fileName . '"'
-        ];
-
-        $this->headers = array_merge($this->headers, $headersExtra);
+        $this->addHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
         return Response::streamDownload(function () use ($csv) {
             echo $csv;
-        }, 'users.csv', $this->headers);
+        }, 'users.csv', $this->getHeaders());
+    }
+
+    protected function getHeaders(): array
+    {
+        return $this->headers;
+    }
+
+    protected function setHeaders(array $headers)
+    {
+        $this->headers = $headers;
+    }
+
+    protected function addHeader(string $key, string $value)
+    {
+        $this->headers[$key] = $value;
+    }
+
+    protected function getHeaderFormat(): array
+    {
+        return config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
     }
 }
