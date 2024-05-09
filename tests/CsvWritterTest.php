@@ -22,6 +22,15 @@ class CsvWritterTest extends BaseTest
     }
 
     #[test]
+    public function it_sets_correct_headers()
+    {
+        $headers = $this->csvWritter->getHeaders();
+
+        $this->assertArrayHasKey('Content-Type', $headers);
+        $this->assertEquals('text/csv', $headers['Content-Type']);
+    }
+
+    #[test]
     public function test_csv_download_with_data()
     {
         $mockData = [
@@ -76,6 +85,7 @@ class CsvWritterTest extends BaseTest
         $this->csvWritter->download($data);
     }
 
+    #[test]
     public function testCsvDownloadWithCustomHeaders()
     {
         $mockData = [
