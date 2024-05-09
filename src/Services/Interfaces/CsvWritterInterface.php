@@ -2,7 +2,7 @@
 
 namespace VoyagerInc\SimpleUserImportCsv\Services\Interfaces;
 
-interface CsvWriterInterface
+interface CsvWritterInterface
 {
     public function download(array $data = []);
 }

@@ -2,7 +2,7 @@
 
 namespace VoyagerInc\SimpleUserImportCsv\Tests;
 
-class CsvFileReaderTest extends \Orchestra\Testbench\TestCase
+class CsvFileReaderTest extends BaseTest
 {
     private $csvFileReader;
 
@@ -13,7 +13,7 @@ class CsvFileReaderTest extends \Orchestra\Testbench\TestCase
         $this->csvFileReader = new \VoyagerInc\SimpleUserImportCsv\Services\CsvFileReader();
     }
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders()
     {
         return [\VoyagerInc\SimpleUserImportCsv\SimpleUserImportCsvServiceProvider::class];
     }

@@ -5,23 +5,23 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SimpleUserImportCsvRequest;
 use Illuminate\Support\Facades\DB;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvFileReaderInterface;
-use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvWriterInterface;
+use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\CsvWritterInterface;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserImportServiceInterface;
 
 class SimpleUserImportCsvController extends Controller
 {
     private $csvFileReader;
     private $userImportService;
-    private $csvWriter;
+    private $csvWritter;
 
     public function __construct(
         CsvFileReaderInterface $csvFileReader,
         UserImportServiceInterface $userImportService,
-        CsvWriterInterface $csvWriter
+        CsvWritterInterface $csvWritter
     ) {
         $this->csvFileReader = $csvFileReader;
         $this->userImportService = $userImportService;
-        $this->csvWriter = $csvWriter;
+        $this->csvWritter = $csvWritter;
     }
 
     public function index()
@@ -54,7 +54,7 @@ class SimpleUserImportCsvController extends Controller
     public function downloadFileTemp()
     {
         try {
-            return $this->csvWriter->download();
+            return $this->csvWritter->download();
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Error: ' . $e->getMessage());
         }

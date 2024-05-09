@@ -34,7 +34,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
             Services\CsvFileReader::class,
             Services\UserImportService::class,
             Services\UserValidator::class,
-            Services\CsvWriter::class,
+            Services\CsvWritter::class,
         ];
     }
 
@@ -63,8 +63,8 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
 
     protected function registerCsvWritter()
     {
-        $this->app->singleton(Services\Interfaces\CsvWriterInterface::class, function ($app) {
-            return new Services\CsvWriter();
+        $this->app->singleton(Services\Interfaces\CsvWritterInterface::class, function ($app) {
+            return new Services\CsvWritter();
         });
     }
 }
