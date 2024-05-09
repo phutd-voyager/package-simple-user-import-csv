@@ -40,17 +40,17 @@ class CsvWritter implements Interfaces\CsvWritterInterface
         }, 'users.csv', $this->getHeaders());
     }
 
-    protected function getHeaders(): array
+    public function getHeaders(): array
     {
         return $this->headers;
     }
 
-    protected function setHeaders(array $headers)
+    public function setHeaders(array $headers)
     {
         $this->headers = $headers;
     }
 
-    protected function addHeader(string $key, string $value)
+    public function addHeader(string $key, string $value)
     {
         $this->headers[$key] = $value;
     }
@@ -60,12 +60,12 @@ class CsvWritter implements Interfaces\CsvWritterInterface
         return config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
     }
 
-    protected function getFileName(): string
+    public function getFileName(): string
     {
         return config('simple_user_import_csv.csv_reader.file_name', 'users.csv');
     }
 
-    protected function setFileName(string $fileName)
+    public function setFileName(string $fileName)
     {
         config(['simple_user_import_csv.csv_reader.file_name' => $fileName]);
     }
