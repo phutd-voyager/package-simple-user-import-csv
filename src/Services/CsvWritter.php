@@ -31,7 +31,7 @@ class CsvWritter implements Interfaces\CsvWritterInterface
         fclose($file);
 
 
-        $fileName = 'users.csv';
+        $fileName = $this->getFileName();
 
         $this->addHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"');
 
@@ -58,5 +58,15 @@ class CsvWritter implements Interfaces\CsvWritterInterface
     protected function getHeaderFormat(): array
     {
         return config('simple_user_import_csv.csv_reader.header_format', ['name', 'email', 'password']);
+    }
+
+    protected function getFileName(): string
+    {
+        return config('simple_user_import_csv.csv_reader.file_name', 'users.csv');
+    }
+
+    protected function setFileName(string $fileName)
+    {
+        config(['simple_user_import_csv.csv_reader.file_name' => $fileName]);
     }
 }
