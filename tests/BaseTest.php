@@ -2,7 +2,7 @@
 
 namespace VoyagerInc\SimpleUserImportCsv\Tests;
 
-abstract class BaseTest extends \Orchestra\Testbench\TestCase
+class BaseTest extends \Orchestra\Testbench\TestCase
 {
     protected function setUp(): void
     {
