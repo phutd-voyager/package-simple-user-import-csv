@@ -27,17 +27,6 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         ]);
     }
 
-    public function provides()
-    {
-        return [
-            Console\InstallCommand::class,
-            Services\CsvFileReader::class,
-            Services\UserImportService::class,
-            Services\UserValidator::class,
-            Services\CsvWritter::class,
-        ];
-    }
-
     protected function registerCsvFileReader()
     {
         $this->app->bind(Services\Interfaces\CsvFileReaderInterface::class, function ($app) {
