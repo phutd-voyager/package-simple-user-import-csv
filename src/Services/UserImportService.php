@@ -3,6 +3,7 @@
 namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use VoyagerInc\SimpleUserImportCsv\Services\Interfaces\UserValidatorInterface;
 
 class UserImportService implements Interfaces\UserImportServiceInterface
@@ -16,14 +17,16 @@ class UserImportService implements Interfaces\UserImportServiceInterface
 
     public function import(array $userData)
     {
+        $dataCreate = [];
+
         foreach ($userData as $data) {
             $this->validator->validate($data);
 
-            $data['password'] = bcrypt($data['password']);
+            $data['password'] = Hash::make($data['password']);
 
-            User::create($data);
+            $dataCreate[] = $data;
         }
 
-        return true;
+        return User::insert($dataCreate);
     }
 }

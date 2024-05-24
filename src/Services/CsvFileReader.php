@@ -29,6 +29,8 @@ class CsvFileReader implements Interfaces\CsvFileReaderInterface
                     'password' => $row[2],
                     'num_rows' => $numRows,
                 ];
+                
+                $numRows++;
             } else {
                 fclose($handle);
                 throw new \Exception('Wrong number of columns.');
