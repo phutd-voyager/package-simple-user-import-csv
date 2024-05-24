@@ -27,34 +27,23 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
         ]);
     }
 
-    public function provides()
-    {
-        return [
-            Console\InstallCommand::class,
-            Services\CsvFileReader::class,
-            Services\UserImportService::class,
-            Services\UserValidator::class,
-            Services\CsvWritter::class,
-        ];
-    }
-
     protected function registerCsvFileReader()
     {
-        $this->app->singleton(Services\Interfaces\CsvFileReaderInterface::class, function ($app) {
+        $this->app->bind(Services\Interfaces\CsvFileReaderInterface::class, function ($app) {
             return new Services\CsvFileReader();
         });
     }
 
     protected function registerUserValidator()
     {
-        $this->app->singleton(Services\Interfaces\UserValidatorInterface::class, function ($app) {
+        $this->app->bind(Services\Interfaces\UserValidatorInterface::class, function ($app) {
             return new Services\UserValidator();
         });
     }
 
     protected function registerUserImportService()
     {
-        $this->app->singleton(Services\Interfaces\UserImportServiceInterface::class, function ($app) {
+        $this->app->bind(Services\Interfaces\UserImportServiceInterface::class, function ($app) {
             $validator = $app->make(Services\Interfaces\UserValidatorInterface::class);
 
             return new Services\UserImportService($validator);
@@ -63,7 +52,7 @@ class SimpleUserImportCsvServiceProvider extends \Illuminate\Support\ServiceProv
 
     protected function registerCsvWritter()
     {
-        $this->app->singleton(Services\Interfaces\CsvWritterInterface::class, function ($app) {
+        $this->app->bind(Services\Interfaces\CsvWritterInterface::class, function ($app) {
             return new Services\CsvWritter();
         });
     }

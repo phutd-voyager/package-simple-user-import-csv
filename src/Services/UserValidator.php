@@ -3,6 +3,7 @@
 namespace VoyagerInc\SimpleUserImportCsv\Services;
 
 use Illuminate\Support\Facades\Validator;
+use VoyagerInc\SimpleUserImportCsv\Constants\ValidationConstant;
 
 class UserValidator implements Interfaces\UserValidatorInterface
 {
@@ -10,11 +11,7 @@ class UserValidator implements Interfaces\UserValidatorInterface
 
     public function __construct()
     {
-        $this->rules = config('user_import_csv.user_validator.rules', [
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-        ]);
+        $this->rules = config('user_import_csv.user_validator.rules', ValidationConstant::RULES_DEFAULT);
     }
 
     public function validate(array $data): void

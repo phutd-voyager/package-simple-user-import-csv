@@ -22,11 +22,21 @@ class UserImportService implements Interfaces\UserImportServiceInterface
         foreach ($userData as $data) {
             $this->validator->validate($data);
 
-            $data['password'] = Hash::make($data['password']);
-
-            $dataCreate[] = $data;
+            $dataCreate[] = $this->transformData($data);
         }
 
         return User::insert($dataCreate);
+    }
+
+    private function transformData(array $data)
+    {
+        $data['password'] = Hash::make($data['password']);
+
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+
+        unset($data['num_rows']);
+
+        return $data;
     }
 }
